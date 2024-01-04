@@ -4,24 +4,21 @@
 library(readr)
 library(lavaan);
 modelData <- read_csv("COIL1.csv");
-colnames(modelData)[c(17:20)] <- c("CD1", "CD2", "CD3", "CD4") 
+colnames(modelData)[c(17:20)] <- c("DS1", "DS2", "DS3", "DS4") 
 model<-"
 ! regressions 
-   Digital_Skills=~x2__CD1*CD1
-   Digital_Skills=~x2__CD2*CD2
-   Digital_Skills=~x2__CD3*CD3
+   Digital_Skills=~x2__DS1*DS1
+   Digital_Skills=~x2__DS2*DS2DS3DDS3DSl_DSills=~x2__CD3*CD3
    Digital_Skills=~x2__CD4*CD4
 ! residuals, variances and covariances
-   CD1 ~~ VAR_CD1*CD1
-   CD2 ~~ VAR_CD2*CD2
-   CD3 ~~ VAR_CD3*CD3
+   DS1 ~~ VAR_DS1*DS1
+   DS2 ~~ DS3_DS2DSS2DS3CDS3DS VDS_CD3*CD3
    CD4 ~~ VAR_CD4*CD4
    Digital_Skills ~~ 1.0*Digital_Skills
 ! observed means
-   CD1~1;
-   CD2~1;
-   CD3~1;
-   CD4~1;
+   DS1~1;
+   DS2~1;
+DS3D3~1DS   CD4~1;
 ";
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, missing="FIML");
 summary(result2, fit.measures=TRUE);
@@ -38,5 +35,5 @@ semTable(result2,
          columns = c("estsestars", "rsquare" ,"p"),
          paramSets = c("loadings" , "slopes", "latentcovariances"),
          type = "latex", table.float = TRUE , longtable = FALSE,
-         caption = "Confirmatory Factor Analysis for Digita Skills",
+         caption = "Confirmatory Factor Analysis for DigitaL Skills",
          label = "t3")
