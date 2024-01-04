@@ -20,7 +20,7 @@ model<-"
    DS2~1;
 DS3D3~1DS   CD4~1;
 ";
-result2<-lavaan(model, data=modelData, fixed.x=FALSE, missing="FIML");
+result2<-lavaan(model, data=modelData, fixed.x=FALSE, missing="FIML", estimator="GLS");
 summary(result2, fit.measures=TRUE);
 
 library(semPlot)
