@@ -10,16 +10,16 @@ library(lavaan);
 modelData <- coil ;
 model<-"
 ! regressions 
-   Digital_Skills=~x2__Instrumental*IN
-   Digital_Skills=~x2__Stra_Privilege*PR
-   Digital_Skills=~x2__Stra_Appropriation*AP
-   Digital_Skills=~x2__Expansive*EX
+   DS=~x2__Instrumental*IN
+   DS=~x2__Stra_Privilege*PR
+   DS=~x2__Stra_Appropriation*AP
+   DS=~x2__Expansive*EX
 ! residuals, variances and covariances
    IN ~~ VAR_Instrumental*IN
    PR ~~ VAR_Stra_Privilege*PR
    AP ~~ VAR_Stra_Appropriation*AP
    EX ~~ VAR_Expansive*EX
-   Digital_Skills ~~ 1.0*Digital_Skills
+   DS ~~ 1.0*DS
 ! observed means
    IN~1;
    PR~1;
@@ -27,18 +27,23 @@ model<-"
    EX~1;
 ";
 
-result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ULS");
-result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM");
-library(boot)
-bootstrap_result <- boot(result1, FUN = lav_boot, R = 1000)
+result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
+result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
+
 
 summary(result1, fit.measures=TRUE);
 summary(result2, fit.measures=TRUE);
 
 library(semPlot)
-semPaths(result2, whatLabels = "std", layout = "spring", color = list(
-  lat = rgb(255, 100, 118, maxColorValue = 255),
+semPaths(result2, whatLabels = "std", layout = "tree", color = list(
+  lat = rgb(124, 12, 199, maxColorValue = 255),
   man = rgb(155, 253, 175, maxColorValue = 255)),
+  edge.color = "black",
+  edge.label.cex = 1,
+  edge.width = 1.5,
+  label.cex = 2,
+  node.width = 2,
+  node.height = 2,
   mar = c(10, 5, 10, 5), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
 library(semTable)
