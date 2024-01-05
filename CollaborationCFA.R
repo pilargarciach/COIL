@@ -43,7 +43,9 @@ model<-"
 
 result3<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result4<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
-lavInspect(result4, what = "theta")
+m2 <- lavInspect(result2, what = "vcov.std.all")
+eigen(m2)
+chol(m2)
 
 summary(result3, fit.measures=TRUE);
 summary(result4, fit.measures=TRUE);
