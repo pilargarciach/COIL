@@ -41,3 +41,17 @@ chol(m6)
 
 summary(result5, fit.measures=TRUE);
 summary(result6, fit.measures=TRUE);
+
+library(semPlot)
+set.seed(1234)
+semPaths(result6, whatLabels = "std", layout = "groups", color = list(
+  lat = rgb(124, 12, 199, maxColorValue = 255),
+  man = rgb(155, 253, 175, maxColorValue = 255)),
+  edge.color = "black",
+  edge.label.cex = 1,
+  edge.width = 1.5,
+  label.cex = 2,
+  node.width = 1,
+  node.height = 1,
+  mar = c(10, 5, 10, 5), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+
