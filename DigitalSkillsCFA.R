@@ -8,12 +8,6 @@ PR <- data.frame(DS[7:13])
 AP <- data.frame(DS[14:17])
 EX <- data.frame(DS[18:22])
 
-library(psych)
-fa.parallel(IN)
-fa.parallel(PR)
-fa.parallel(AP)
-fa.parallel(EX)
-
 library(MVN)
 MVN::mvn(DS)
 
@@ -40,8 +34,9 @@ model<-"
 
 result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
-a <- lavInspect(result1, what = "est")
-
+m1 <- lavInspect(result2, what = "vcov.std.all")
+eigen(m1)
+chol(m1)
 
 summary(result1, fit.measures=TRUE);
 summary(result2, fit.measures=TRUE);
