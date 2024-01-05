@@ -8,17 +8,6 @@ PR <- data.frame(DS[7:13])
 AP <- data.frame(DS[14:17])
 EX <- data.frame(DS[18:22])
 
-library(coefficientalpha)
-coefficientalpha::tau.test(IN, varphi = 0)
-coefficientalpha::tau.test(PR, varphi = 0)
-coefficientalpha::tau.test(AP, varphi = 0)
-coefficientalpha::tau.test(EX, varphi = 0)
-
-coefficientalpha::omega(IN, varphi = 0)
-coefficientalpha::omega(PR, varphi = 0)
-coefficientalpha::omega(AP, varphi = 0, se = TRUE)
-coefficientalpha::omega(EX, varphi = 0, se = TRUE)
-
 library(psych)
 fa.parallel(IN)
 fa.parallel(PR)
