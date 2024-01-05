@@ -1,5 +1,21 @@
 library(readr)
 coil <- read_delim("coil.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+DS <- data.frame(coil[27:48])
+variable.names(DS)
+IN <- data.frame(DS[1:6])
+PR <- data.frame(DS[7:13])
+AP <- data.frame(DS[14:17])
+EX <- data.frame(DS[18:22])
+
+library(coefficientalpha)
+omega(IN, varphi = 0)
+omega(PR, varphi = 0)
+omega(AP, varphi = 0)
+omega(EX, varphi = 0)
+
+
+
 coil <- coil[51:54]
 
 library(MVN)
