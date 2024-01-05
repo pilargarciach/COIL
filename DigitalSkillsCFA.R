@@ -39,7 +39,7 @@ eigen(m1)
 chol(m1)
 
 summary(result1, fit.measures=TRUE);
-summary(result2, fit.measures=TRUE);
+1summary(result2, fit.measures=TRUE);
 
 library(semPlot)
 semPaths(result2, whatLabels = "std", layout = "tree", color = list(
