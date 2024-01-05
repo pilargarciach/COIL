@@ -28,7 +28,8 @@ model<-"
 
 result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
-lavInspect(result1, what = "cov.all")
+a <- lavInspect(result1, what = "est")
+
 
 summary(result1, fit.measures=TRUE);
 summary(result2, fit.measures=TRUE);
