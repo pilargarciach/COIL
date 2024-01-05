@@ -27,8 +27,10 @@ model<-"
    EX~1;
 ";
 
-result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML");
+result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ULS");
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM");
+library(boot)
+bootstrap_result <- boot(result1, FUN = lav_boot, R = 1000)
 
 summary(result1, fit.measures=TRUE);
 summary(result2, fit.measures=TRUE);
