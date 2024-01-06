@@ -1,3 +1,4 @@
+
 library(readr)
 coil <- read_delim("coil.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -34,6 +35,9 @@ model<-"
 
 result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
+# To inspect the standardized estimates for factor loadings
+lavInspect(result2, what = "std.all")
+
 m1 <- lavInspect(result2, what = "vcov.std.all")
 eigen(m1)
 chol(m1)
