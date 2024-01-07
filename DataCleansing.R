@@ -24,19 +24,19 @@ colnames(coil)[18] <- "IN3"
 colnames(coil)[19] <- "IN4"
 colnames(coil)[20] <- "IN5"
 colnames(coil)[21] <- "IN6"
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
-colnames(coil)[] <-
+colnames(coil)[22] <- "PR1"
+colnames(coil)[23] <- "PR2"
+colnames(coil)[24] <- "PR3"
+colnames(coil)[25] <- "PR4"
+colnames(coil)[26] <- "PR5"
+colnames(coil)[27] <- "PR6"
+colnames(coil)[28] <- "PR7"
+colnames(coil)[29] <- ""
+colnames(coil)[30] <- ""
+colnames(coil)[31] <- ""
+colnames(coil)[32] <- ""
+colnames(coil)[33] <- ""
+colnames(coil)[34] <- ""
+colnames(coil)[35] <- ""
+colnames(coil)[36] <- ""
+colnames(coil)[37] <- ""
