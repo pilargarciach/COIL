@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<model name="Collaboration CFA" specificationType="ONYX" specificationVersion="1.0-1026">
+<model name="StructuralModel" specificationType="ONYX" specificationVersion="1.0-1026">
 <graph backgroundColor="#ffffff" height="848" meanTreatment="implicit" width="1349">
 <node caption="SP" constant="false" fillColor="#ffffff" fillStyle="GRADIENT" height="50" id="0" labelFontSize="10" latent="false" lineColor="#0" multiplicative="false" normalized="true" roughness="0" strokeWidth="2.0" width="50" x="72" y="714"/>
 <node caption="CR" constant="false" fillColor="#ffffff" fillStyle="GRADIENT" height="50" id="1" labelFontSize="10" latent="false" lineColor="#0" multiplicative="false" normalized="true" roughness="0" strokeWidth="2.0" width="50" x="417" y="717"/>
