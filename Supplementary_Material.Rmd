@@ -237,9 +237,11 @@ The bad news about the "first" and "second" confirmatory factor analyses is that
 
 ```{r, echo = TRUE}
 m1 <- lavInspect(result2, what = "vcov.std.all")
-eigen(m1)
+EIGEN <- eigen(m1)
+EIGEN$values
 m2 <- lavInspect(result4, what = "vcov.std.all")
-eigen(m2)
+EIGEN2 <- eigen(m2)
+EIGEN2$values
 ```
 
 The definitive proof that this solution is not admissible is evident if you run the Cholesky decomposition by running `chol(m1)` for the "first" model and `chol(m2)` for the "second" model.
@@ -255,5 +257,7 @@ Importantly, ordinary least squares estimation is no longer suitable for solving
 library(MIIVsem)
 miivs(model)
 summary(miivs(model), eq.info = TRUE)
+pave <- miive(model, coildata)
+estimatesTable(pave)
 ```
 
