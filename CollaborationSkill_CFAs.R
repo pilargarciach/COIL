@@ -63,7 +63,7 @@ result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRU
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
 
 library(semPlot)
-semPaths(result2, whatLabels = "std", layout = "spring", color = list(
+semPaths(result2, whatLabels = "std", layout = "tree", color = list(
   lat = rgb(124, 12, 199, maxColorValue = 255),
   man = rgb(155, 253, 175, maxColorValue = 255)),
   edge.color = "black",
@@ -72,7 +72,7 @@ semPaths(result2, whatLabels = "std", layout = "spring", color = list(
   label.cex = 1,
   node.width = 1,
   node.height = 1,
-  mar = c(1, 1, 1, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
 pave <- summary(result2, fit.measures=TRUE)
 pave$fit[3:5]
@@ -249,4 +249,82 @@ semPaths(result8, whatLabels = "std", layout = "tree", color = list(
   label.cex = 1,
   node.width = 1,
   node.height = 1,
-  mar = c(2, 1, 1, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+
+
+modelData <- coildata
+model5<-"
+! regressions 
+   CR=~CR__CR2*CR2
+   CR=~CR__CR3*CR3
+   CR=~CR__SP4*SP4
+   CR=~CR__CD1*CD1
+   CR=~CR__CD4*CD4
+! residuals, variances and covariances
+   SP4 ~~ VAR_SP4*SP4
+   CR2 ~~ VAR_CR2*CR2
+   CR3 ~~ VAR_CR3*CR3
+   CD1 ~~ VAR_CD1*CD1
+   CD4 ~~ VAR_CD4*CD4
+   CR ~~ 1.0*CR
+! observed means
+   SP4~1;
+   CR2~1;
+   CR3~1;
+   CD1~1;
+   CD4~1;
+"
+result9 <- lavaan(model5, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
+result10 <- lavaan(model5, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
+
+m5 <- lavInspect(result10, what = "vcov.std.all")
+eigen(m5)
+chol(m5)
+
+
+semPaths(result10, whatLabels = "std", layout = "tree", color = list(
+  lat = rgb(124, 12, 199, maxColorValue = 255),
+  man = rgb(155, 253, 175, maxColorValue = 255)),
+  edge.color = "black",
+  edge.label.cex = 1,
+  edge.width = 1.5,
+  label.cex = 1,
+  node.width = 1,
+  node.height = 1,
+  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+
+
+modelData <- coildata
+M6 <-"
+! regressions 
+   CR=~CR__CR2*CR2
+   CR=~CR__CR3*CR3
+   CR=~CR__SP4*SP4
+! residuals, variances and covariances
+   SP4 ~~ VAR_SP4*SP4
+   CR2 ~~ VAR_CR2*CR2
+   CR3 ~~ VAR_CR3*CR3
+   CR ~~ 1.0*CR
+! observed means
+   SP4~1;
+   CR2~1;
+   CR3~1;
+"
+R11 <- lavaan(M6, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
+R12 <- lavaan(M6, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
+
+m6 <- lavInspect(R12, what = "vcov.std.all")
+eigen(m6)
+chol(m6)
+
+
+semPaths(R12, whatLabels = "std", layout = "tree", color = list(
+  lat = rgb(124, 12, 199, maxColorValue = 255),
+  man = rgb(155, 253, 175, maxColorValue = 255)),
+  edge.color = "black",
+  edge.label.cex = 1,
+  edge.width = 1.5,
+  label.cex = 1,
+  node.width = 1,
+  node.height = 1,
+  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
