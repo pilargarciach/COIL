@@ -1,7 +1,5 @@
 library(readr)
-coil <- read_delim("coil.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
-coil <- coil[1:48]
-coil <- coil[c(9:13,15:19,21:25,27:48)]
+coildata <- read_csv("coildata.csv")
 library(lavaan);
 modelData <- coil
 model<-"
