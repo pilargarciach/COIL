@@ -64,7 +64,7 @@ result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = 
 
 library(semPlot)
 set.seed(56)
-png("F1.png", width = 15, height = 7, units = 'in', res = 300)
+png("F1.png", width = 15, height = 12, units = 'in', res = 300)
 
 semPaths(result2, whatLabels = "none", layout = "tree", color = list(
   lat = rgb(255, 255, 255, maxColorValue = 255),
