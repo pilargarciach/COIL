@@ -63,7 +63,7 @@ result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRU
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
 
 library(semPlot)
-semPaths(result2, whatLabels = "std", layout = "tree", color = list(
+semPaths(result2, whatLabels = "std", layout = "spring", color = list(
   lat = rgb(124, 12, 199, maxColorValue = 255),
   man = rgb(155, 253, 175, maxColorValue = 255)),
   edge.color = "black",
@@ -72,7 +72,7 @@ semPaths(result2, whatLabels = "std", layout = "tree", color = list(
   label.cex = 1,
   node.width = 1,
   node.height = 1,
-  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+  mar = c(1, 1, 1, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
 pave <- summary(result2, fit.measures=TRUE)
 pave$fit[3:5]
