@@ -74,5 +74,13 @@ semPaths(result2, whatLabels = "std", layout = "spring", color = list(
   node.height = 1,
   mar = c(1, 1, 1, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
-fit <- summary(result2, fit.measures=TRUE)
-fit
+fit1 <- summary(result1, fit.measures=TRUE)
+fit2 <- summary(result2, fit.measures=TRUE)
+
+Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
+Model1 <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25])
+Model2 <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47])
+Results <- data.frame(Fit.Index, Model1, Model2)
+Results <- round(Results[2:3], 3)
+Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
+rownames(Results) Results$Fit.Index
