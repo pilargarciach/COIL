@@ -29,7 +29,7 @@ ggplot(coildata_long, aes(x = value, fill = variable)) +
   geom_density(alpha = 0.5) +
   facet_wrap(~variable, scales = "free", ncol = 5) +
   theme_minimal() +  # Optional: Customize the theme
-  labs(title = "Kernel Density Plots for Coildata Variables")
+  labs(title = "Statistical distributions of observed variables")
 
 library(MVN)
 mvn(coildata)
