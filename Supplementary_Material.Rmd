@@ -11,7 +11,8 @@ CFA is a well-known technique in psychology and social sciences. Despite its rep
 
 The data relates to 15 items (observed variables) which are theoretically linked to the concept of Transactive Memory System (TMS). TMS refers to the way people work in collaboration with others. Thus, TMS can be regarded as a "Collaboration Skill". Here, we want to test the psychometric structure of the scale originally developed for English-speakers by Lewis (2003) and re-adapted for Spanish by García-Chitiva (2021).
 
-```{r}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
 ```
@@ -106,6 +107,8 @@ modelData <- coildata ;
 "
 result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE);
+fit2 <- summary(result2, fit.measures=TRUE)
+fit1 <- summary(result1, fit.measures=TRUE)
 ```
 
 Before showing the goodness-of-fit for this model, we highlight its standardized statistical estimates, so we can spot which items should be removed due to their low association with the latent variables.
@@ -125,29 +128,31 @@ semPaths(result2, whatLabels = "std", layout = "spring", color = list(
   mar = c(1, 1, 1, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 ```
 
-It should be evident that the following items didn't behave as expected:
+It should be evident that the following items didn't behave as expected due to their almost-zero or lower-than-zero factor loadings which contradict theoretical expectations:
 
-- CR4
-- CR5
-- SP2
-- CD3
-- CD5
+- CR4 (factor loading = -0.04)
+- CR5 (factor loading = -0.26)
+- SP2 (factor loading = 0.04)
+- CD3 (factor loading = -0.26)
+- CD5 (factor loading = -0.30)
 
-Before removing these items from our original specification, we want to highlight the model's fit through the maximum likelihood (ML) method with (result1) and without (result2) the Satorra-Bentler adjustment, as follows:
+Before removing these items from our original specification, we want to highlight the model's fit through the maximum likelihood (ML) estimation method with (Model B) and without (Model A) the Satorra-Bentler correction for the $\chi^2$ test that yields to robust goodness of fit, as follows: 
 
 
-```{r}
-fit <- summary(result2, fit.measures=TRUE)
-fit$fit[3:5]
-fit$fit[6:8]
-fit$fit[17:22]
-fit$fit[29:33]
-fit$fit[37:40]
-fit$fit[42:45]
-fit$fit[47]
+```{r, echo=FALSE}
+Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
+Model.A <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25])
+Model.B <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47])
+Results <- data.frame(Fit.Index, Model.A, Model.B)
+Results <- round(Results[2:3], 3)
+library(kableExtra)
+tbl <- kable(Results)
+tbl <- tbl %>%
+  kable_styling(full_width = FALSE)
+tbl
 ```
 
-In SEM, goodness-of-fit indices such as CFI and TLI should be higher than 0.9 to claim that the model reveals a good fit—likewise, RMSEA is lower than 0.05, and SRMR is lower than 0.08. Interested readers can consult the article of Hu and Bentler (1999) to dive deep into the rationality of these rules of thumb.  
+The results for the first measurement model specification are not satisfactory. Both CFI and TLI are below the acceptable threshold of 0.9 to claim that the model reveals a good fit. Likewise, both RMSEA and SRMR show that exceed the acceptable thresholds (RMSEA $\leq$ 0.05 and SRMR $\leq$ 0.08). Interested readers can consult the article of Hu and Bentler (1999) to dive deep into the rationality of these rules of thumb.  
 
 ### A Second Model
 
