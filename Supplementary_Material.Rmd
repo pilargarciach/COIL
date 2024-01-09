@@ -16,14 +16,29 @@ library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
 ```
 
+## Testing Univariate and Multivariate Normal Distribution Assumptions
+
+The evaluation of these assumptions is relatively straightforward through exploratory data visualization of kernel density plots and the Henze-Zirkler test implemented in the R package MVN
+
+```{r}
+library(ggplot2)
+
+coildata_long <- reshape2::melt(coildata)
+
+ggplot(coildata_long, aes(x = value, fill = variable)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~variable, scales = "free", ncol = 5) +
+  theme_minimal() +  # Optional: Customize the theme
+  labs(title = "Kernel Density Plots for Coildata Variables")
+
+library(MVN)
+mvn(coildata)
+```
+
 
 ## Confirmatory Factor Analysis
 
-Our first "naïve" approach is to specify a full confirmatory factor analysis model with the following three latent variables of TMS
-
-- SP (Specialization)
-- CR (Credibility), and
-- CD (Coordination)
+Our first measurement model specification can be regarded as a confirmatory factor analysis, as it sets the full theoretical factor structure with the following three latent variables: Specialization (SP), Credibility (CR), and Coordination (CD) with 15 observed variables.
 
 ### A First Model
 
