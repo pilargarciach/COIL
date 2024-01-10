@@ -93,3 +93,31 @@ fit1$fit[14]
 fit2$fit[26]
 
 fit1$fit
+
+# Penalized Model1
+
+library(lslx)
+PenalizedModel <- '
+   SP =~ free() * SP1 + pen() * SP2 + free() * SP3 + free() * SP4 + free() * SP5
+   CR =~ free() * CR1 + free() * CR2 + free() * CR3 + pen() * CR4 + pen() * CR5
+   CD =~ free() * CD1 + free() * CD2 + pen() * CD3 + free() * CD4 + pen() * CD5
+   SP <=> fix(1) * SP
+   CR <=> fix(1) * CR
+   CD <=> fix(1) * CD
+   SP1~1;
+   SP2~1;
+   SP3~1;
+   SP4~1;
+   SP5~1;
+   CR1~1;
+   CR2~1;
+   CR3~1;
+   CR4~1;
+   CR5~1;
+   CD1~1;
+   CD2~1;
+   CD3~1;
+   CD4~1;
+   CD5~1;'
+
+lslx_fa <- lslx$new(model = PenalizedModel, data = coildata)
