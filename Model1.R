@@ -75,7 +75,8 @@ semPaths(result2, whatLabels = "std", layout = "spring", color = list(
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
 fit <- cfa(model, data = coildata)
-summary(fit)
+summary(fit, fit.measures = TRUE)
+fit2
 
 lavTest(fit, test = "browne.residual.adf")
 class(model)
