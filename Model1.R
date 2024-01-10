@@ -2,9 +2,8 @@ library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
 coildata <- coildata[1:15]
 library(lavaan);
-modelData <- coildata ;
-model<-"
-! regressions 
+modelData <- coildata 
+model <- '
    SP=~SP__SP1*SP1
    SP=~SP__SP2*SP2
    SP=~SP__SP3*SP3
@@ -20,7 +19,6 @@ model<-"
    CD=~CD__CD3*CD3
    CD=~CD__CD4*CD4
    CD=~CD__CD5*CD5
-! residuals, variances and covariances
    SP1 ~~ VAR_SP1*SP1
    SP2 ~~ VAR_SP2*SP2
    SP3 ~~ VAR_SP3*SP3
@@ -42,7 +40,6 @@ model<-"
    SP ~~ COV_SP_CR*CR
    CR ~~ COV_CR_CD*CD
    SP ~~ COV_SP_CD*CD
-! observed means
    SP1~1;
    SP2~1;
    SP3~1;
@@ -57,10 +54,11 @@ model<-"
    CD2~1;
    CD3~1;
    CD4~1;
-   CD5~1;
-";
-result1<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
-result2<-lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
+   CD5~1;'
+
+
+result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
+result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
 
 library(semPlot)
 semPaths(result2, whatLabels = "std", layout = "spring", color = list(
@@ -76,11 +74,21 @@ semPaths(result2, whatLabels = "std", layout = "spring", color = list(
 
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
+fit <- cfa(model, data = coildata)
+summary(fit)
 
-Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
-ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25])
-ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47])
+lavTest(fit, test = "browne.residual.adf")
+class(model)
+
+Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
+ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14])
+ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47], fit2$fit[25], fit2$fit[26])
 Results <- data.frame(Fit.Index, ModelA, ModelB)
 Results <- round(Results[2:3], 3)
-Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
+Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
 Results <- Results[, c(3, 1, 2)]
+
+fit1$fit[14]
+fit2$fit[26]
+
+fit1$fit
