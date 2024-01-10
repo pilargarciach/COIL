@@ -140,11 +140,13 @@ Before removing these items from our original specification, we want to highligh
 
 
 ```{r, echo=FALSE}
-Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
-Model.A <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25])
-Model.B <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47])
-Results <- data.frame(Fit.Index, Model.A, Model.B)
+Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
+ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14])
+ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47], fit2$fit[25], fit2$fit[26])
+Results <- data.frame(Fit.Index, ModelA, ModelB)
 Results <- round(Results[2:3], 3)
+Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
+Results <- Results[, c(3, 1, 2)]
 library(kableExtra)
 tbl <- kable(Results)
 tbl <- tbl %>%
