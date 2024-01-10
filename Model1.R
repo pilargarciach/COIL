@@ -60,6 +60,10 @@ model <- '
 result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
 
+lavTestLRT(result1)
+lavTestLRT(result2)
+
+
 library(semPlot)
 semPaths(result2, whatLabels = "std", layout = "spring", color = list(
   lat = rgb(124, 12, 199, maxColorValue = 255),
@@ -77,6 +81,8 @@ fit2 <- summary(result2, fit.measures=TRUE)
 fit <- cfa(model, data = coildata)
 summary(fit, fit.measures = TRUE)
 fit2
+
+
 
 lavTest(fit, test = "browne.residual.adf")
 class(model)
@@ -121,3 +127,5 @@ PenalizedModel <- '
    CD5~1;'
 
 lslx_fa <- lslx$new(model = PenalizedModel, data = coildata)
+
+lslx_fa$fit(penalty_method = "mcp", lambda_grid = seq(0.01, 0.60, 0.01), delta_grid = c(1.5, 3.0, Inf))
