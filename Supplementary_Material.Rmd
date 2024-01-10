@@ -152,7 +152,7 @@ tbl <- tbl %>%
 tbl
 ```
 
-The results for the first measurement model specification are not satisfactory. Both CFI and TLI are below the acceptable threshold of 0.9 to claim that the model reveals a good fit. Likewise, both RMSEA and SRMR show that exceed the acceptable thresholds (RMSEA $\leq$ 0.05 and SRMR $\leq$ 0.08). Interested readers can consult the article of Hu and Bentler (1999) to dive deep into the rationality of these rules of thumb.  
+Neither the results for Model A or Model B proved to be satisfactory, despite the higher values for the estimated parameters for the factor loadings of items and covariance between the theoretical dimensions of collaboration. Both CFI and TLI are below the acceptable threshold of 0.9 to claim that the model reveals a good fit. Likewise, both RMSEA and SRMR show acceptable values that exceeded the recommended thresholds (RMSEA $\leq$ 0.05 and SRMR $\leq$ 0.08). Interested readers can consult the article of Hu and Bentler (1999) to dive deep into the rationality of these rules of thumb.  
 
 ### A Second Model
 
