@@ -78,9 +78,9 @@ fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
 
 Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
-Model1 <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25])
-Model2 <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47])
-Results <- data.frame(Fit.Index, Model1, Model2)
+ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25])
+ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47])
+Results <- data.frame(Fit.Index, ModelA, ModelB)
 Results <- round(Results[2:3], 3)
 Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR")
-rownames(Results) Results$Fit.Index
+Results <- Results[, c(3, 1, 2)]
