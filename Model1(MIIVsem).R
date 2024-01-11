@@ -1,6 +1,5 @@
 library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
-coildata <- coildata[1:15]
 library(lavaan);
 modelData <- coildata 
 model1 <- '
@@ -57,3 +56,8 @@ model1 <- '
    CD5~1;'
 library(MIIVsem)
 miivs(model1)
+miive(model = model1, data = data)
+
+
+model1_miiv <- miive(model = model1, data = data)$dat
+write.csv(model1_miiv, "~/Desktop/model1_miiv.csv")
