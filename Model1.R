@@ -1,6 +1,5 @@
 library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
-coildata <- coildata[1:15]
 library(lavaan);
 modelData <- coildata 
 model <- '
