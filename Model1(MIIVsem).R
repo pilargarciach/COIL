@@ -61,7 +61,7 @@ write.csv(model1_params, "model1_params.csv")
 
 library(MIIVsem)
 miivs(model1)
-model1_miiv <- miive(model = model1, data = coildata)
+model1_miiv <- miive(model = model1, data = coildata, sarg.adjust = "holm")
 Model1_miiv <- estimatesTable(model1_miiv)
 write.csv(Model1_miiv, "Model1_miiv.csv")
 
