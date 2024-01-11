@@ -63,9 +63,24 @@ result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov 
 lavTestLRT(result1)
 lavTestLRT(result2)
 
+m1 <- lavInspect(result2, what = "vcov.std.all")
+chol(m1)
+eigen(m1)
+
+library(semTable)
+semTable(list("Model A" = result1, "Model B" = result2),
+         columns = c("estsestars", "rsquare" ,"p"), 
+         fits = c("chisq", "rmsea", "srmr", "cfi", "tli"),
+         paramSets = c("loadings", "latentcovariances"),
+         table.float = TRUE, 
+         longtable = FALSE, 
+         caption = "Statistical Estimated Parameters for Collaboration",
+         label = "t1")
+
+
 
 library(semPlot)
-semPaths(result2, whatLabels = "std", layout = "spring", color = list(
+semPaths(result2, whatLabels = "std", layout = "tree", color = list(
   lat = rgb(124, 12, 199, maxColorValue = 255),
   man = rgb(155, 253, 175, maxColorValue = 255)),
   edge.color = "black",
@@ -74,18 +89,12 @@ semPaths(result2, whatLabels = "std", layout = "spring", color = list(
   label.cex = 1,
   node.width = 1,
   node.height = 1,
-  mar = c(1, 1, 1, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
+  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
-fit <- cfa(model, data = coildata)
-summary(fit, fit.measures = TRUE)
-fit2
 
-
-
-lavTest(fit, test = "browne.residual.adf")
-class(model)
+lavTest(result2, test = "browne.residual.adf")
 
 Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
 ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14])
@@ -99,6 +108,10 @@ fit1$fit[14]
 fit2$fit[26]
 
 fit1$fit
+
+
+
+
 
 # Penalized Model1
 
