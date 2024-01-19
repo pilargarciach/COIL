@@ -141,3 +141,4 @@ PenalizedModel <- '
 lslx_fa <- lslx$new(model = PenalizedModel, data = coildata)
 
 lslx_fa$fit(penalty_method = "mcp", lambda_grid = seq(0.01, 0.60, 0.01), delta_grid = c(1.5, 3.0, Inf))
+lslx_fa$summarize(selector = "bic", interval = FALSE)
