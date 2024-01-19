@@ -1,5 +1,17 @@
 library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
+
+library(ggplot2)
+png("F1.png", width = 15, height = 7, units = 'in', res = 300)
+ggplot(coildata_long, aes(x = value, fill = variable)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~variable, scales = "free", ncol = 5) +
+  theme_minimal() +  # Optional: Customize the theme
+  labs(title = "Statistical distributions of observed variables")
+dev.off()
+
+
+
 library(lavaan);
 modelData <- coildata 
 model <- '
