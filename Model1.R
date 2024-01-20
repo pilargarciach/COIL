@@ -146,6 +146,9 @@ mi <- mi
 hist(mi$mi)
 mi$epc
 MODTEST <- miPowerFit(result0, stdLoad = 0.4, cor = 0.1, stdBeta = 0.1, intcept = 0.2, cilevel = 0.95)
+table(MODTEST$decision.pow)
+table(MODTEST$decision.ci)
+
 
 Residual <- lavTest(result2, test = "browne.residual.adf")
 lavTest(result2, test = "browne.residual.nt")
