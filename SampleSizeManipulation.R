@@ -86,31 +86,17 @@ eigen(m2)
 
 
 
-library(semTable)
-semTable(list("Model A" = result1, "Model B" = result2),
-         columns = c("estsestars", "rsquare" ,"p"), 
-         fits = c("chisq", "rmsea", "srmr", "cfi", "tli"),
-         paramSets = c("loadings", "latentcovariances"),
-         table.float = TRUE, 
-         longtable = FALSE, 
-         caption = "Statistical Estimated Parameters for Collaboration",
-         label = "t1")
 
-
-
-library(semPlot)
-semPaths(result2, whatLabels = "std", layout = "tree", color = list(
-  lat = rgb(124, 12, 199, maxColorValue = 255),
-  man = rgb(155, 253, 175, maxColorValue = 255)),
-  edge.color = "black",
-  edge.label.cex = 1,
-  edge.width = 1.5,
-  label.cex = 1,
-  node.width = 1,
-  node.height = 1,
-  mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
 fit3 <- summary(result3, fit.measures=TRUE)
 fit4 <- summary(result4, fit.measures=TRUE)
+
+ModelStatistics <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC", "Sample.Size")
+ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14], fit1$data[2])
+ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47], fit2$fit[25], fit2$fit[26], fit2$data[2])
+ModelC <- c(fit3$fit[3], fit3$fit[9],  fit3$fit[10], fit3$fit[17], fit3$fit[25], fit3$fit[13], fit3$fit[14], fit3$data[2])
+ModelD <- c(fit4$fit[6], fit4$fit[21],  fit4$fit[22], fit4$fit[42], fit4$fit[47], fit4$fit[25], fit4$fit[26], fit4$data[2])
+results <- list(c(ModelA, ModelB, ModelC, ModelD))
+results <- data.frame(do.call("cbind", list(ModelA, ModelB, ModelC, ModelD)))
