@@ -100,3 +100,6 @@ ModelC <- c(fit3$fit[3], fit3$fit[9],  fit3$fit[10], fit3$fit[17], fit3$fit[25],
 ModelD <- c(fit4$fit[6], fit4$fit[21],  fit4$fit[22], fit4$fit[42], fit4$fit[47], fit4$fit[25], fit4$fit[26], fit4$data[2])
 results <- list(c(ModelA, ModelB, ModelC, ModelD))
 results <- data.frame(do.call("cbind", list(ModelA, ModelB, ModelC, ModelD)))
+colnames(results)[1:4] <- c("ModelA", "ModelB", "ModelC", "ModelD")
+variable.names(results)
+View(results)
