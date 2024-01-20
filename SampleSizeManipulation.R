@@ -5,11 +5,7 @@ coil2  <-  do.call(rbind, coil2)
 
 summary(coildata) == summary(coil2)
 
-
-
-
-library(lavaan);
-modelData <- coildata 
+library(lavaan)
 model <- '
    SP=~SP__SP1*SP1
    SP=~SP__SP2*SP2
@@ -64,8 +60,8 @@ model <- '
    CD5~1;'
 
 
-result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
-result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
+result1 <- lavaan(model, data=coildata, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
+result2 <- lavaan(model, data=coildata, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
 result3 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "ML", std.ov=TRUE)
 result4 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "MLM", std.ov=TRUE)
 
@@ -82,6 +78,13 @@ lavTestLRT(result4)
 m1 <- lavInspect(result2, what = "vcov.std.all")
 chol(m1)
 eigen(m1)
+
+m2 <- lavInspect(result4, what = "vcov.std.all")
+chol(m2)
+eigen(m2)
+
+
+
 
 library(semTable)
 semTable(list("Model A" = result1, "Model B" = result2),
