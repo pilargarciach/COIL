@@ -2,8 +2,13 @@ library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
 coil2 <- replicate(5, coildata, simplify = FALSE) 
 coil2  <-  do.call(rbind, coil2)
-
+# replicating the sample inflates skewness and kurtosis
 summary(coildata) == summary(coil2)
+
+library(MVN)
+mvn(coildata)
+mvn(coil2)
+
 
 library(lavaan)
 model <- '
@@ -102,3 +107,11 @@ results <- list(c(ModelA, ModelB, ModelC, ModelD))
 results <- data.frame(do.call("cbind", list(ModelA, ModelB, ModelC, ModelD)))
 colnames(results)[1:4] <- c("ModelA", "ModelB", "ModelC", "ModelD")
 variable.names(results)
+results$ModelA <- as.numeric(results$ModelA)
+results$ModelB <- as.numeric(results$ModelB)
+results$ModelC <- as.numeric(results$ModelC)
+results$ModelD <- as.numeric(results$ModelD)
+
+results <- round(results, 3)
+results[8, ] <- round(results[8, ], 0)
+results
