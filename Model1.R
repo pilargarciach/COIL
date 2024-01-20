@@ -1,14 +1,34 @@
 library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
+coildata_long <- reshape2::melt(coildata)
 
 library(ggplot2)
-png("F1.png", width = 15, height = 7, units = 'in', res = 300)
+png("F2.png", width = 15, height = 7, units = 'in', res = 300)
 ggplot(coildata_long, aes(x = value, fill = variable)) +
   geom_density(alpha = 0.5) +
   facet_wrap(~variable, scales = "free", ncol = 5) +
   theme_minimal() +  # Optional: Customize the theme
   labs(title = "Statistical distributions of observed variables")
 dev.off()
+
+coil2 <- replicate(5, coildata, simplify = FALSE) 
+coil2  <-  do.call(rbind, coil2)
+
+summary(coildata) == summary(coil2)
+
+
+
+library(MVN)
+mvn(coildata)
+mvn(coil2)
+
+coildata_long2 <- reshape2::melt(coil2)
+
+ggplot(coildata_long2, aes(x = value, fill = variable)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~variable, scales = "free", ncol = 5) +
+  theme_minimal() +  # Optional: Customize the theme
+  labs(title = "Statistical distributions of observed variables")
 
 
 
@@ -74,6 +94,11 @@ result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov 
 lavTestLRT(result1)
 lavTestLRT(result2)
 
+
+
+
+
+
 m1 <- lavInspect(result2, what = "vcov.std.all")
 chol(m1)
 eigen(m1)
@@ -105,7 +130,9 @@ semPaths(result2, whatLabels = "std", layout = "tree", color = list(
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
 
-lavTest(result2, test = "browne.residual.adf")
+Residual <- lavTest(result2, test = "browne.residual.adf")
+lavTest(result2, test = "browne.residual.nt")
+Residual$stat.group
 
 Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
 ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14])
