@@ -90,10 +90,14 @@ model <- '
 
 result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
+result3 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "ML", std.ov=TRUE)
+result4 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "MLM", std.ov=TRUE)
+
 
 lavTestLRT(result1)
 lavTestLRT(result2)
-
+lavTestLRT(result3)
+lavTestLRT(result4)
 
 
 
@@ -129,6 +133,9 @@ semPaths(result2, whatLabels = "std", layout = "tree", color = list(
 
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
+fit3 <- summary(result3, fit.measures=TRUE)
+fit4 <- summary(result4, fit.measures=TRUE)
+
 
 Residual <- lavTest(result2, test = "browne.residual.adf")
 lavTest(result2, test = "browne.residual.nt")
@@ -137,6 +144,8 @@ Residual$stat.group
 Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
 ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14])
 ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47], fit2$fit[25], fit2$fit[26])
+ModelC <- c(fit3$fit[3], fit3$fit[9],  fit3$fit[10], fit3$fit[17], fit3$fit[25], fit3$fit[13], fit3$fit[14])
+ModelD <- c(fit4$fit[3], fit4$fit[9],  fit4$fit[10], fit4$fit[17], fit4$fit[25], fit4$fit[13], fit4$fit[14])
 Results <- data.frame(Fit.Index, ModelA, ModelB)
 Results <- round(Results[2:3], 3)
 Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC")
