@@ -87,7 +87,7 @@ model <- '
    CD4~1;
    CD5~1;'
 
-
+result0 <- cfa(model, modelData)
 result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
 result3 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "ML", std.ov=TRUE)
@@ -131,11 +131,21 @@ semPaths(result2, whatLabels = "std", layout = "tree", color = list(
   node.height = 1,
   mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
+
+fit0 <- summary(result0)
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
 fit3 <- summary(result3, fit.measures=TRUE)
 fit4 <- summary(result4, fit.measures=TRUE)
 
+
+
+library(semTools)
+mi <- modificationIndices(result0)
+mi <- mi
+hist(mi$mi)
+mi$epc
+MODTEST <- miPowerFit(result0, stdLoad = 0.4, cor = 0.1, stdBeta = 0.1, intcept = 0.2, cilevel = 0.95)
 
 Residual <- lavTest(result2, test = "browne.residual.adf")
 lavTest(result2, test = "browne.residual.nt")
