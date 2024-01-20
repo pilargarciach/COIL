@@ -143,14 +143,14 @@ Residual$stat.group
 
 fit2$data[2]
 
-Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC", "Sample.Size")
+ModelStatistics <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC", "Sample.Size")
 ModelA <- c(fit1$fit[3], fit1$fit[9],  fit1$fit[10], fit1$fit[17], fit1$fit[25], fit1$fit[13], fit1$fit[14], fit1$data[2])
 ModelB <- c(fit2$fit[6], fit2$fit[21], fit2$fit[22], fit2$fit[42], fit2$fit[47], fit2$fit[25], fit2$fit[26], fit2$data[2])
 ModelC <- c(fit3$fit[3], fit3$fit[9],  fit3$fit[10], fit3$fit[17], fit3$fit[25], fit3$fit[13], fit3$fit[14], fit3$data[2])
 ModelD <- c(fit4$fit[3], fit4$fit[9],  fit4$fit[10], fit4$fit[17], fit4$fit[25], fit4$fit[13], fit4$fit[14], fit4$data[2])
-Results <- data.frame(Fit.Index, ModelA, ModelB, ModelC, ModelD)
+Results <- data.frame(ModelStatistics, ModelA, ModelB, ModelC, ModelD)
 Results <- round(Results[2:3], 3)
-Results$Fit.Index <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC", "Sample.Size")
+Results$ModelStatistics <- c("Chi2", "CFI", "TLI", "RMSEA", "SRMR", "AIC", "BIC", "Sample.Size")
 Results <- Results[, c(3, 1, 2)]
 
 fit1$fit[14]
