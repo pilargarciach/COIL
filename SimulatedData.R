@@ -2,6 +2,7 @@ library(readr)
 coildata <- coildata <- read_csv("coildata.csv")
 
 library(MVN)
+mvn(coildata)
 Skewness <- mvn(coildata)$Descriptives[9]
 Skewness <- round(Skewness$Skew, digits = 3) 
 
@@ -70,3 +71,35 @@ population.sigma <- as.matrix(population.sigma)
 library(covsim)
 set.seed(1234)
 res  <- covsim::rPLSIM(10^3, population.sigma, skewness=Skewness, excesskurtosis=Kurtosis)
+S1 <- data.frame(res$samples[1])
+mvn(S1)
+
+coildata_long <- reshape2::melt(coildata)
+library(ggplot2)
+ggplot(coildata_long, aes(x = value, fill = variable)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~variable, scales = "free", ncol = 5) +
+  theme_minimal() +  # Optional: Customize the theme
+  labs(title = "Statistical distributions of observed variables")
+
+coildata_long2 <- reshape2::melt(S1)
+ggplot(coildata_long2, aes(x = value, fill = variable)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~variable, scales = "free", ncol = 5) +
+  theme_minimal() +  # Optional: Customize the theme
+  labs(title = "Statistical distributions of observed variables")
+
+mvn(S1)
+mvn(coildata)
+
+colnames(S1)[1:15] <- variable.names(coildata)
+variable.names(S1)
+
+fit2  <- cfa(model, S1)
+
+fit
+fit2
+
+summary(fit2, fit.measures=TRUE)
+summary(fit, fit.measures=TRUE)
+
