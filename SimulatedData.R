@@ -103,3 +103,22 @@ fit2
 summary(fit2, fit.measures=TRUE)
 summary(fit, fit.measures=TRUE)
 
+
+library(semTools)
+mi <- modificationIndices(fit)
+mi <- mi
+hist(mi$mi)
+mi$epc
+MODTEST <- miPowerFit(fit, stdLoad = 0.4, cor = 0.1, stdBeta = 0.1, intcept = 0.2, cilevel = 0.95)
+table(MODTEST$decision.pow)
+table(MODTEST$decision.ci)
+
+
+mi2 <- modificationindices(fit2)
+mi2 <- mi2
+hist(mi2$mi)
+mi2$epc
+MODTEST2 <- miPowerFit(fit2, stdLoad = 0.4, cor = 0.1, stdBeta = 0.1, intcept = 0.2, cilevel = 0.95)
+
+table(MODTEST2$decision.pow)
+table(MODTEST2$decision.ci)
