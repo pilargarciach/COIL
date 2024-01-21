@@ -141,7 +141,7 @@ fit4 <- summary(result4, fit.measures=TRUE)
 
 
 library(semTools)
-mi <- modificationIndices(result0)
+mi <- modificationIndices(result1)
 mi <- mi
 hist(mi$mi)
 mi$epc
