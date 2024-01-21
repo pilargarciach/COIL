@@ -87,7 +87,7 @@ model <- '
    CD4~1;
    CD5~1;'
 
-result0 <- cfa(model, modelData)
+result0 <- lavaan.2stage(model=model, modelData, se = "standard")
 result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
 result3 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "ML", std.ov=TRUE)
