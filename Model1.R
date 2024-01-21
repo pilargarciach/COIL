@@ -132,7 +132,7 @@ semPaths(result2, whatLabels = "std", layout = "tree", color = list(
   mar = c(3, 1, 3, 1), intercepts = FALSE, residuls = FALSE, nCharNodes = 0)
 
 
-fit0 <- summary(result0, fit.measures=TRUE)
+
 fit1 <- summary(result1, fit.measures=TRUE)
 fit2 <- summary(result2, fit.measures=TRUE)
 fit3 <- summary(result3, fit.measures=TRUE)
