@@ -36,7 +36,6 @@ library(MVN)
 mvn(coildata)
 ```
 
-
 ## Confirmatory Factor Analysis
 
 Our first measurement model specification can be regarded as a confirmatory factor analysis, as it sets the full theoretical factor structure with the following three latent variables: Specialization (SP), Credibility (CR), and Coordination (CD) with 15 observed variables.
@@ -155,6 +154,13 @@ tbl
 ```
 
 Neither the results for Model A or Model B proved to be satisfactory, despite the higher values for the estimated parameters for the factor loadings of items and covariance between the theoretical dimensions of collaboration. Both CFI and TLI are below the acceptable threshold of 0.9 to claim that the model reveals a good fit. Likewise, both RMSEA and SRMR show acceptable values that exceeded the recommended thresholds (RMSEA $\leq$ 0.05 and SRMR $\leq$ 0.08). Interested readers can consult the article of Hu and Bentler (1999) to dive deep into the rationality of these rules of thumb.  
+
+## Searching the cause of misfit
+
+The above model shows a poor fit despite its estimates with high magnitudes and statistical significance. The co-existence of these two aspects of the model raises concerns about the structure of the model itself. 
+1. Are the parameter estimates biased because of non-normality, misspecification, or small sample?
+2. Are the poor goodness-of-fit the results of non-normality, misspecification or small sample?
+
 
 ### A Second Model
 
