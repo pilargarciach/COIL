@@ -72,7 +72,7 @@ semTable(list("Model A" = result1, "Model B" = result2),
          longtable = FALSE, 
          caption = "Statistical Estimated Parameters for Collaboration",
          label = "t1",
-         type = "latex")
+         type = "csv")
 
 
 modelData <- coildata ;
