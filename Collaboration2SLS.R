@@ -58,7 +58,7 @@ model1<-"
    CD4~1;
    CD5~1;
 "
-
+library(MIIVsem)
 miivs(model1)
 pave <- miive(model1, coildata)
 summary(miivs(model1), eq.info = TRUE)
