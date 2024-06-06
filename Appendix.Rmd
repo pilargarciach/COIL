@@ -38,7 +38,7 @@ model<-"
    Stra_Appropriation~1;
    Expansive~1;
 ";
-resultT<-lavaan(model, data=modelData, fixed.x=FALSE, missing="FIML");
+resultT <- lavaan(model, data=modelData, fixed.x=FALSE, missing="FIML");
 summary(resultT, fit.measures=TRUE);
 
 resultT2 <- lavaan(model, data=modelData, fixed.x=FALSE, missing="listwise", estimator = "DWLS");
