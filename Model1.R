@@ -32,7 +32,8 @@ ggplot(coildata_long2, aes(x = value, fill = variable)) +
 
 
 
-library(lavaan);
+library(lavaan)
+library(semTools)
 modelData <- coildata 
 model <- '
    SP=~SP__SP1*SP1
@@ -87,7 +88,7 @@ model <- '
    CD4~1;
    CD5~1;'
 
-result0 <- lavaan.2stage(model=model, modelData, se = "standard")
+result0 <- lavaan.2stage(model=model, modelData, se = "robust.huber.white")
 result1 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="ML", std.ov=TRUE);
 result2 <- lavaan(model, data=modelData, fixed.x=FALSE, estimator="MLM", std.ov = TRUE)
 result3 <- lavaan(model, data=coil2, fixed.x=FALSE, estimator = "ML", std.ov=TRUE)
@@ -115,7 +116,8 @@ semTable(list("Model A" = result1, "Model B" = result2),
          table.float = TRUE, 
          longtable = FALSE, 
          caption = "Statistical Estimated Parameters for Collaboration",
-         label = "t1")
+         label = "t1",
+         type = "csv")
 
 
 
